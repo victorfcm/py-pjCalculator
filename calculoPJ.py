@@ -18,12 +18,14 @@
 
 from datetime import date
 
-def catch_data():
+def catch_data(dias_mes = 30):
 	"""
 	Função que faz o calculo de salário de Pessoa Jurídica.
 	
-	Não precisa de parâmetros.
-	Calculo baseado em 30 dias de trabalho.
+	@param :
+		-- dias_mes = Default 30, dias do mês corrente (no 
+		-- qual serão baseados os calculos, em caso apenas
+		-- dias úteis, digite a quantidade de dias.
 	
 	Após efetuar o calculo é feita uma pergunta para saber 
 	se você deseja salvar o resultado em um arquivo.
@@ -33,12 +35,12 @@ def catch_data():
 	"""
 	
 	print("Olá, bem vindo ao programa de calculo de salários PJ")
-	data_entrada = int(raw_input('Qual dia do mês começa o calculo? (digite 0 para o mês inteiro) : '))
+	data_entrada = int(raw_input('Qual dia do mês começa o calculo? : '))
 	salario_bruto = float(raw_input("Qual valor total do salário? ( formato : XXXX.XX ) : "))
 	c = raw_input("Confirma entrada no dia %i e o salário de %s?  [y/n] : " % (data_entrada, salario_bruto))
 	
 	if c == "y":
-		total = str(round((30 - data_entrada) * (salario_bruto / 30), 2))
+		total = str(round((dias_mes - (data_entrada - 1)) * (salario_bruto / dias_mes), 2))
 		print(" ------------ Salário total de : "+ total)
 		record = raw_input("Deseja gravar esta informação no arquivo listaPGTO.txt? [y/n] : ")
 		
@@ -61,4 +63,4 @@ def catch_data():
 print "\n ---------------------------- ** ---------------------------- \n"
 print catch_data.__doc__
 print "\n ---------------------------- ** ---------------------------- \n"
-catch_data()
+catch_data(31)
